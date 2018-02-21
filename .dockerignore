@@ -1,0 +1,4 @@
+.git
+.nuxt
+# dependencies
+node_modules

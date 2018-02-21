@@ -1,0 +1,7 @@
+Sitemap: https://element-43.com/sitemap.xml.gz
+
+User-agent: *
+Disallow: /api/
+Disallow: /user/
+Disallow: /market/trading/station/
+Disallow: /market/region/

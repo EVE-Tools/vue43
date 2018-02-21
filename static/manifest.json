@@ -1,0 +1,36 @@
+{
+  "short_name": "Element43",
+  "name": "Free and open data for EVE Online",
+  "icons": [
+    {
+      "src": "launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+    "src": "apple-touch-icon.png",
+    "type": "image/png",
+    "sizes": "180x180"
+    },
+    {
+    "src": "store-icon.png",
+    "type": "image/png",
+    "sizes": "1024x1024"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#f7a53d",
+  "display": "standalone",
+  "orientation": "portrait"
+}

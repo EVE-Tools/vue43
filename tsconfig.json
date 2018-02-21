@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "dom",
+            "es2017"
+        ],
+        "module": "es2015",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "strict": true,
+        "removeComments": true,
+        "strictPropertyInitialization": false,
+        "suppressImplicitAnyIndexErrors": false,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "~/*" : ["./*"],
+            "~/assets/*": ["./assets/*"],
+            "~/components/*": ["./components/*"],
+            "~/pages/*": ["./pages/*"],
+            "~/plugins/*": ["./plugins/*"],
+            "~/static/*": ["./static/*"]
+        }
+    }
+}

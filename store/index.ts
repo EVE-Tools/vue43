@@ -50,8 +50,6 @@ if ((process as any).server) {
   httpSettings.baseURL = 'https://element-43.com/api'
 }
 
-httpSettings.baseURL = 'https://element-43.com/api'
-
 export const apiClient = axios.create(httpSettings)
 
 const store = () => new Vuex.Store<State>({

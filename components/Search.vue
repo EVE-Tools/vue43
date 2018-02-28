@@ -45,7 +45,7 @@
   import { slugifyID } from '../util/slug'
 
   import { apiClient } from '../store/index'
-  import { readTypes, dispatchLoadType, TypeInfo } from '../store/modules/types'
+  import { readTypes, readMarketTypes, dispatchLoadType, dispatchLoadMarketTypes, TypeInfo } from '../store/modules/types'
 
   /** The main search component. SearchResults are displayed in a SearchResultList. */
   @Component({})
@@ -76,12 +76,20 @@
       if (this.query.length > 2) {
         try {
           this.loading = true
+
+          // Ensure market types are loaded, consecutive calls return immediately
+          await dispatchLoadMarketTypes(this.$store)
+          const marketTypes = readMarketTypes(this.$store)
+
+          // Fire search query
           const response = await apiClient.get('https://esi.tech.ccp.is/v1/search/', {params: {categories: 'inventorytype', search: this.query}})
 
-          // Slice top 10 results
-          const rawResults = response.data.inventorytype.slice(0, 25)
+          // Filter market types
+          const rawResults = response.data.inventorytype.filter((id: number) => {
+            return marketTypes.has(id)
+          })
 
-          // Get type info of results
+          // Get type info of results if market type
           let promises = rawResults.map((type_id: number) => {
             return dispatchLoadType(this.$store, type_id)
           })
@@ -89,13 +97,6 @@
 
           // Filter results
           const finalResults: TypeInfo[] = rawResults
-            .filter((type_id: number) => {
-              const type = this.types[type_id]
-              if (type && type.published && type.market_group_id) {
-                return true
-              }
-              return false
-            })
             .map((type_id: number): TypeInfo => {
               return this.types[type_id]
             })

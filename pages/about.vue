@@ -42,9 +42,6 @@
             <v-list-tile>
               <a href="https://github.com/EVE-Tools">Source Code Repositories</a>
             </v-list-tile>
-            <v-list-tile>
-              <a href="https://groups.google.com/forum/#!forum/element43">Google Group</a>
-            </v-list-tile>
           </v-list>
         </v-flex>
       </v-layout>

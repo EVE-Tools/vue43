@@ -59,7 +59,7 @@
         <td v-if="props.item.week_volume_relative_standard_deviation < 0.2" class="text-xs-right green--text">{{ abbreviateNumber(props.item.week_volume_relative_standard_deviation * 100, 2) }} %</td>
         <td v-else-if="props.item.week_volume_relative_standard_deviation > 0.5" class="text-xs-right red--text">{{ abbreviateNumber(props.item.week_volume_relative_standard_deviation * 100, 2) }} %</td>
         <td v-else class="text-xs-right">{{ abbreviateNumber(props.item.week_volume_relative_standard_deviation * 100, 2) }} %</td>
-        <td class="text-xs-right tooltip" :data-tooltip="abbreviateNumber(props.item.week_isk_volume_average) + ' ISK'">{{ abbreviateNumber(props.item.week_volume_average) }}</td>
+        <td class="text-xs-right">{{ abbreviateNumber(props.item.week_volume_average) }}</td>
       </template>
     </v-data-table>
   </div>
@@ -106,7 +106,7 @@
 
     pagination = {
       descending: true,
-      sortBy: 'week_isk_volume_average',
+      sortBy: 'week_volume_average',
       rowsPerPage: 500
     }
 
@@ -122,7 +122,7 @@
       { text: 'Top Bid', align: 'right', sortable: false },
       { text: 'Rel. Spread', align: 'right', sortable: false },
       { text: 'Volatility (Volume)', align: 'right', value: 'week_volume_relative_standard_deviation' },
-      { text: 'Avg. Daily Volume', align: 'right', value: 'week_isk_volume_average' },
+      { text: 'Avg. Daily Volume', align: 'right', value: 'week_volume_average' },
     ]
 
     @Watch('orders', { immediate: true })

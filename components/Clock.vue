@@ -1,9 +1,11 @@
 <template lang="html">
   <v-btn flat>
-    <v-tooltip bottom>
-      <span slot="activator">{{ time.getUTCHours() }}:{{ ("0" + time.getUTCMinutes()).slice(-2) }}</span>
-      <span>UTC/EVE Time</span>
-    </v-tooltip>
+    <div>
+      <v-tooltip bottom>
+        <span slot="activator">{{ time.getUTCHours() }}:{{ ("0" + time.getUTCMinutes()).slice(-2) }}</span>
+        <span>UTC/EVE Time</span>
+      </v-tooltip>
+    </div>
   </v-btn>
 </template>
 

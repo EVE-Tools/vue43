@@ -1,10 +1,12 @@
 <template lang="html">
   <v-btn flat>
-    <v-tooltip bottom>
-      <span slot="activator" v-if="players > -1"><span class="online">•&thinsp;</span>{{ formatNumber(players) }}</span>
-      <span slot="activator" v-else><span class="offline">•&thinsp;</span>offline</span>
-      <span>Players Online (Tranquility)</span>
-    </v-tooltip>
+    <div>
+      <v-tooltip bottom>
+        <span slot="activator" v-if="players > -1"><span class="online">•&thinsp;</span>{{ formatNumber(players) }}</span>
+        <span slot="activator" v-else><span class="offline">•&thinsp;</span>offline</span>
+        <span>Players Online (Tranquility)</span>
+      </v-tooltip>
+    </div>
   </v-btn>
 </template>
 

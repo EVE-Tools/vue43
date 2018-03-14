@@ -70,7 +70,8 @@
     headers = [
       {
         text: 'Region',
-        align: 'left'
+        align: 'left',
+        sortable: false
       },
       {
         text: 'Location',

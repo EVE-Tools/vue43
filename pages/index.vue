@@ -7,7 +7,13 @@
       </v-flex>
       <v-flex xs3 md3></v-flex>
     </v-layout>
-    <search></search>
+    <v-layout row wrap class="mt-5 mb-5">
+      <v-flex xs0 md4></v-flex>
+      <v-flex xs12 md4>
+        <search :autofocus="true"></search>
+      </v-flex>
+      <v-flex xs0 md4></v-flex>
+    </v-layout>
     <v-container grid-list-md class="mt-5">
       <v-layout row wrap class="mt-5">
         <v-flex xs12 md4>

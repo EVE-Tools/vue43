@@ -61,6 +61,9 @@
       </v-fade-transition>
       <v-spacer></v-spacer>
       <v-toolbar-items>
+        <search class="titlesearch"></search>
+      </v-toolbar-items>
+      <v-toolbar-items>
         <clock></clock>
         <server-status></server-status>
       </v-toolbar-items>
@@ -74,12 +77,14 @@
   import { Prop } from 'vue-property-decorator'
 
   import Clock from './Clock.vue'
+  import Search from '../components/Search.vue'
   import ServerStatus from './ServerStatus.vue'
 
   /** The main container for the title bar's other components */
   @Component({
     components: {
       Clock,
+      Search,
       ServerStatus
     }
   })
@@ -87,3 +92,13 @@
     drawer = true
   }
 </script>
+
+<style scoped>
+  .titlesearch {
+    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+</style>
+

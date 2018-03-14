@@ -1,59 +1,58 @@
-<template lang="html">
-  <v-layout row wrap class="mt-5 mb-5">
-    <v-flex xs0 md4>
-    </v-flex>
-    <v-flex xs12 md4>
-      <v-select
-        v-model="selected"
-        :items="searchResults"
-        :search-input.sync="query"
-        :loading="loading"
-        item-text="name"
-        item-value="name"
-        label="Search item..."
-        no-data-text="No matching items found"
-        append-icon=""
-        color="white"
-        clearable
-        return-object
-        autocomplete>
-        <template slot="selection" slot-scope="data">
-          {{ data.item.name }}
-        </template>
-        <template slot="item" slot-scope="data">
-          <template v-if="typeof data.item == 'object'">
-            <v-list-tile-avatar>
-              <img :src="'https://image.eveonline.com/Type/' + data.item.type_id + '_64.png'">
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-            </v-list-tile-content>
-          </template>
-        </template>
-      </v-select>
-    </v-flex>
-    <v-flex xs0 md4>
-    </v-flex>
-  </v-layout>
+<template lang="html">  
+  <v-select
+    v-model="selected"
+    :items="searchResults"
+    :search-input.sync="query"
+    :loading="loading"
+    item-text="name"
+    item-value="name"
+    label="Search item..."
+    no-data-text="No matching items found"
+    append-icon=""
+    color="white"
+    clearable
+    return-object
+    autocomplete
+    :autofocus="autofocus"
+    >
+    <template slot="selection" slot-scope="data">
+      {{ data.item.name }}
+    </template>
+    <template slot="item" slot-scope="data">
+      <template v-if="typeof data.item == 'object'">
+        <v-list-tile-avatar>
+          <img :src="'https://image.eveonline.com/Type/' + data.item.type_id + '_64.png'">
+        </v-list-tile-avatar>
+        <v-list-tile-content>
+          <nuxt-link :id="'searchlink-' + data.item.type_id" :to="{ name: 'market-type', params: { type: slugify(data.item.type_id, data.item.name) } }">
+            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+          </nuxt-link>
+        </v-list-tile-content>
+      </template>
+    </template>
+  </v-select>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
   import Component from 'nuxt-class-component'
-  import { Watch } from 'vue-property-decorator'
+  import { Prop, Watch } from 'vue-property-decorator'
 
   import { slugifyID } from '../util/slug'
 
   import { apiClient } from '../store/index'
   import { readTypes, readMarketTypes, dispatchLoadType, dispatchLoadMarketTypes, TypeInfo } from '../store/modules/types'
 
-  /** The main search component. SearchResults are displayed in a SearchResultList. */
+  /** The main search component. */
   @Component({})
   export default class Search extends Vue {
     searchResults: TypeInfo[] = []
     query = ''
     loading = false
     selected: any = {}
+
+    @Prop()
+    autofocus: boolean
 
     get types() {
       return readTypes(this.$store)
@@ -65,15 +64,21 @@
       }
     }
 
+    slugify (id: number, name: string) {
+      return slugifyID(id, name)
+    }
+
     @Watch('selected')
     onSelectItem (selected: TypeInfo) {
-      this.$router.push({name: 'market-type', params: { type: slugifyID(selected.type_id, selected.name) }})
+      if (selected) {
+        this.$router.push({name: 'market-type', params: { type: slugifyID(selected.type_id, selected.name) }})
+      }
     }
 
     @Watch('query')
     async onChangeQuery (query: string) {
       // Get results from ESI, load type info to determine if types are on market, then display results
-      if (this.query.length > 2) {
+      if (this.query && (this.query.length > 2)) {
         try {
           this.loading = true
 
